@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, send_file
 import os, time
-from assets import Relatorio
+from .assets import Relatorio
 
 app = Flask(__name__, template_folder=os.path.dirname(__file__))
 
