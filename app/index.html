@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <title>Análise financeira</title>
+        <style>
+            body{
+                background-image: linear-gradient(45deg, rgb(0, 170, 142), rgb(0, 197, 171));
+                background-attachment: fixed;
+            }
+            #wrap{
+                margin-left: 5%;
+                margin-right: 5%;
+                height: 490px;
+                width: 400px;
+                border: 1px solid white;
+                background-image: linear-gradient(45deg, rgb(255, 0, 0), rgb(216, 0, 65));
+                box-shadow: 2px 3px 4px black;
+                border-radius: 20px;
+                padding: 2%;
+            }
+            h1{
+                margin: 5%;
+                font: 20pt 'arial';
+                color: white;
+                text-shadow: 2px 1px 3px black;
+            }
+            #wrap .datas{
+                margin-top: 5%;
+                margin-bottom: 5%;
+                font: 14pt 'arial';
+                color: white;
+                text-shadow: 2px 1px 3px black; 
+            }
+            #wrap .check{
+                margin-top: 5%;
+                margin-bottom: 5%;
+                font: 14pt 'arial';
+                color: white;
+                text-shadow: 1px 1px 3px black; 
+                border-color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrap">
+            <h1>Análise de ativos financeiros</h1>
+
+            <textarea id="w3review" name="w3review" rows="4" cols="45">;ITSA4.SA;PETR4.SA;</textarea> 
+            
+            <div class="datas">
+                <label>Data início</label>
+                <input id="datainicio" type="date">
+                </br></br>
+                <label>Data fim</label>
+                <input id="datafim" type="date">
+            </div>
+
+            <div class="check">
+                <input type="checkbox" id="aux1" name="vehicle1" value="Bike">
+                <label for="aux1">Imprimir tabela com os valores</label><br>
+                <input type="checkbox" id="aux2" name="vehicle2" value="Car">
+                <label for="aux2">Exibir gráfico dos ativos</label><br>
+                <input type="checkbox" id="aux3" name="vehicle3" value="Boat">
+                <label for="aux3">Exibir gráfico normalizados</label><br> 
+                <input type="checkbox" id="aux4" name="vehicle3" value="Boat">
+                <label for="aux3">Exibir gráfico de volatividade</label><br> 
+                <input type="checkbox" id="aux5" name="vehicle3" value="Boat">
+                <label for="aux3">Exibir tabela de retorno e volatividade</label><br> 
+                <input type="checkbox" id="aux6" name="vehicle3" value="Boat">
+                <label for="aux3">Exibir gráfico com base em Markowitz</label><br> 
+            </div>
+            </br>
+            <center><input type="button" value="Gerar relatório" id="relatorio"></center>
+        </div>
+    </body>
+</html>
