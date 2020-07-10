@@ -4,22 +4,20 @@
         <title>Análise financeira</title>
         <style>
             body{
-                background-image: linear-gradient(45deg, rgb(0, 170, 142), rgb(0, 197, 171));
+                background-image: linear-gradient(45deg, rgb(31, 255, 97), rgb(0, 197, 171));
                 background-attachment: fixed;
             }
             #wrap{
-                margin-left: 5%;
-                margin-right: 5%;
-                height: 490px;
-                width: 400px;
-                border: 1px solid white;
+                height: 87%;
+                width: 375px;
+                border: 2px solid white;
                 background-image: linear-gradient(45deg, rgb(255, 0, 0), rgb(216, 0, 65));
                 box-shadow: 2px 3px 4px black;
                 border-radius: 20px;
                 padding: 2%;
             }
             h1{
-                margin: 5%;
+                margin: 4%;
                 font: 20pt 'arial';
                 color: white;
                 text-shadow: 2px 1px 3px black;
@@ -31,6 +29,19 @@
                 color: white;
                 text-shadow: 2px 1px 3px black; 
             }
+            #wrap textarea{
+                margin-left: 2%;
+                margin-right: 5%;
+            }
+            #wrap center input{
+                border: 2px solid white;
+                box-shadow: 2px 3px 4px black;
+                background-color: rgb(0, 63, 130);
+                color: white;
+                font: 14pt 'arial';
+                padding: 15px;
+                border-radius: 20px;
+            }
         </style>
     </head>
     <body>
@@ -39,7 +50,7 @@
 
             <form action="/" method="POST">
                 
-                <textarea id="tikers" name="tikers" rows="4" cols="45">;ITSA4.SA;PETR4.SA;</textarea> 
+                <textarea id="tikers" style="resize:none" name="tikers" rows="4" cols="40%" aria-expanded="false">;ITSA4.SA;PETR4.SA;</textarea> 
                 
                 <div class="form-group">
                     <label>Data início</label>
@@ -63,8 +74,7 @@
                     <input type="checkbox" id="aux6" name="aux6" value="aux6">
                     <label for="aux6">Exibir gráfico com base em Markowitz</label><br> 
                 </div>
-                </br>
-                <input type="submit" value="Gerar relatório" id="relatorio" onclick="enviar()">
+                <center><input type="submit" value="Gerar relatório" id="relatorio" onclick="enviar()" onmousemove="javascript: this.style.backgroundColor = 'black'" onmouseout="javascript: this.style.backgroundColor = 'rgb(0, 63, 130)'"></center>
             </form>
         </div>
     </body>
