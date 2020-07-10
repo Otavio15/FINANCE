@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, send_file
-import os, time
-from .assets import Relatorio
+from .assets import Relatorio;
+from flask import Flask, render_template, request, send_file;
+import os, time;
 
 app = Flask(__name__, template_folder=os.path.dirname(__file__))
 
@@ -48,4 +48,4 @@ def index():
         return render_template('index.html')
 
 if __name__ == '__main__':
-   app.run(host='0.0.0.0')
+   app.run(host='0.0.0.0', debug=False)
