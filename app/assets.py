@@ -6,7 +6,7 @@ from matplotlib.backends.backend_pdf import PdfPages
 from pandas_datareader import data as wb 
 from svglib.svglib import svg2rlg
 from io import BytesIO
-import six, os, webbrowser, style
+import six, os #,webbrowser
 
 class Relatorio:
     def __init__(self):
@@ -184,5 +184,5 @@ class Relatorio:
                 plt.close()
             
 
-            webbrowser.open(os.path.dirname(__file__)+'/dados.pdf')
+            #webbrowser.open(os.path.dirname(__file__)+'/dados.pdf')
 

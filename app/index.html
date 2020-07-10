@@ -1,3 +1,4 @@
+
 <html>
     <head>
         <title>Análise financeira</title>
@@ -23,20 +24,12 @@
                 color: white;
                 text-shadow: 2px 1px 3px black;
             }
-            #wrap .datas{
+            #wrap .form-group{
                 margin-top: 5%;
                 margin-bottom: 5%;
                 font: 14pt 'arial';
                 color: white;
                 text-shadow: 2px 1px 3px black; 
-            }
-            #wrap .check{
-                margin-top: 5%;
-                margin-bottom: 5%;
-                font: 14pt 'arial';
-                color: white;
-                text-shadow: 1px 1px 3px black; 
-                border-color: black;
             }
         </style>
     </head>
@@ -44,32 +37,44 @@
         <div id="wrap">
             <h1>Análise de ativos financeiros</h1>
 
-            <textarea id="w3review" name="w3review" rows="4" cols="45">;ITSA4.SA;PETR4.SA;</textarea> 
-            
-            <div class="datas">
-                <label>Data início</label>
-                <input id="datainicio" type="date">
-                </br></br>
-                <label>Data fim</label>
-                <input id="datafim" type="date">
-            </div>
+            <form action="/" method="POST">
+                
+                <textarea id="tikers" name="tikers" rows="4" cols="45">;ITSA4.SA;PETR4.SA;</textarea> 
+                
+                <div class="form-group">
+                    <label>Data início</label>
+                    <input id="datainicio" type="date" name="DataInicio">
+                    </br></br>
+                    <label>Data fim</label>
+                    <input id="datafim" type="date" name="DataFim">
+                </div>
 
-            <div class="check">
-                <input type="checkbox" id="aux1" name="vehicle1" value="Bike">
-                <label for="aux1">Imprimir tabela com os valores</label><br>
-                <input type="checkbox" id="aux2" name="vehicle2" value="Car">
-                <label for="aux2">Exibir gráfico dos ativos</label><br>
-                <input type="checkbox" id="aux3" name="vehicle3" value="Boat">
-                <label for="aux3">Exibir gráfico normalizados</label><br> 
-                <input type="checkbox" id="aux4" name="vehicle3" value="Boat">
-                <label for="aux3">Exibir gráfico de volatividade</label><br> 
-                <input type="checkbox" id="aux5" name="vehicle3" value="Boat">
-                <label for="aux3">Exibir tabela de retorno e volatividade</label><br> 
-                <input type="checkbox" id="aux6" name="vehicle3" value="Boat">
-                <label for="aux3">Exibir gráfico com base em Markowitz</label><br> 
-            </div>
-            </br>
-            <center><input type="button" value="Gerar relatório" id="relatorio"></center>
+                <div class="form-group">
+                    <input type="checkbox" id="aux1" name="aux1" value="aux1">
+                    <label for="aux1">Imprimir tabela com os valores</label><br>
+                    <input type="checkbox" id="aux2" name="aux2" value="aux2">
+                    <label for="aux2">Exibir gráfico dos ativos</label><br>
+                    <input type="checkbox" id="aux3" name="aux3" value="aux3">
+                    <label for="aux3">Exibir gráfico normalizados</label><br> 
+                    <input type="checkbox" id="aux4" name="aux4" value="aux4">
+                    <label for="aux4">Exibir gráfico de volatividade</label><br> 
+                    <input type="checkbox" id="aux5" name="aux5" value="aux5">
+                    <label for="aux5">Exibir tabela de retorno e volatividade</label><br> 
+                    <input type="checkbox" id="aux6" name="aux6" value="aux6">
+                    <label for="aux6">Exibir gráfico com base em Markowitz</label><br> 
+                </div>
+                </br>
+                <input type="submit" value="Gerar relatório" id="relatorio" onclick="enviar()">
+            </form>
         </div>
     </body>
+    <script>
+        function enviar(){
+            if (document.getElementById('datainicio').value == '' || document.getElementById('datafim').value == ''){
+                alert('Por favor preencha as datas')
+            }else{
+                alert('Estamos processando sua requisição. Por favor aguarde o seu PDF.')
+            }
+        }
+    </script>
 </html>

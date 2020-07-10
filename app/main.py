@@ -1,71 +1,51 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-from style import Ui_MainWindow
+from flask import Flask, render_template, request, send_file
+import os, time
 from assets import Relatorio
 
-class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
-    def __init__(self):
-        super(MainWindow, self).__init__()
-        self.setupUi(self)
+app = Flask(__name__, template_folder=os.path.dirname(__file__))
 
-        def gerarRelatorio():
-            self.progressBar.setValue(self.progressBar.value() + 2)
-            self.lcdNumber.display(self.progressBar.value() + 2)
-            flag_imprimir_tabela = self.checkBox_1.isChecked()
-            self.progressBar.setValue(self.progressBar.value() + 2)
-            self.lcdNumber.display(self.progressBar.value() + 2)
-            flag_imprimir_grafico = self.checkBox_2.isChecked()
-            self.progressBar.setValue(self.progressBar.value() + 2)
-            self.lcdNumber.display(self.progressBar.value() + 2)
-            flag_imprimir_grafico_normalizado = self.checkBox_3.isChecked()
-            self.progressBar.setValue(self.progressBar.value() + 2)
-            self.lcdNumber.display(self.progressBar.value() + 2)
-            flag_imprimir_grafico_volatividade = self.checkBox_4.isChecked()
-            self.progressBar.setValue(self.progressBar.value() + 2)
-            self.lcdNumber.display(self.progressBar.value() + 2)
-            flag_imprimir_retorno_volatividade = self.checkBox_6.isChecked()
-            self.progressBar.setValue(self.progressBar.value() + 2)
-            self.lcdNumber.display(self.progressBar.value() + 2)
-            flag_imprimir_melhores_ativos = self.checkBox_7.isChecked()
-            self.progressBar.setValue(self.progressBar.value() + 2)
-            self.lcdNumber.display(self.progressBar.value() + 2)
-            texto = self.texto.toPlainText()
-            self.progressBar.setValue(self.progressBar.value() + 2)
-            self.lcdNumber.display(self.progressBar.value() + 2)
-            data_inicio = self.dataInicio.text()
-            self.progressBar.setValue(self.progressBar.value() + 2)
-            self.lcdNumber.display(self.progressBar.value() + 2)
-            data_inicio = data_inicio[6:] + '-' + data_inicio[3:5] + '-' +data_inicio[0:2]
-            self.progressBar.setValue(self.progressBar.value() + 2)
-            self.lcdNumber.display(self.progressBar.value() + 2)
-            data_fim = self.dataFim.text()
-            self.progressBar.setValue(self.progressBar.value() + 2)
-            self.lcdNumber.display(self.progressBar.value() + 2)
-            data_fim = data_fim[6:] + '-' + data_fim[3:5] + '-' +data_fim[0:2]
-            self.progressBar.setValue(self.progressBar.value() + 2)
-            self.lcdNumber.display(self.progressBar.value() + 2)
+@app.route('/',methods = ['POST', 'GET'])
+def index():
+    if request.method == 'GET':
+        return render_template('index.html')
+    if request.method == 'POST':
+        result = request.form
+        result = result.to_dict(flat=False)
+        if result['DataInicio'] != [''] and result['DataFim'] != ['']:
+            data_inicio = result['DataInicio'][0]
+            data_fim = result['DataFim'][0]
+            flag_imprimir_tabela = False
+            flag_imprimir_grafico = False
+            flag_imprimir_grafico_normalizado = False
+            flag_imprimir_grafico_volatividade = False
+            flag_imprimir_retorno_volatividade = False
+            flag_imprimir_melhores_ativos = False
+
+            if 'aux1' in result:
+                flag_imprimir_tabela = True
+            if 'aux2' in result:
+                flag_imprimir_grafico = True
+            if 'aux3' in result:
+                flag_imprimir_grafico_normalizado = True
+            if 'aux4' in result:
+                flag_imprimir_grafico_volatividade = True
+            if 'aux5' in result:
+                flag_imprimir_retorno_volatividade = True
+            if 'aux6' in result:
+                flag_imprimir_melhores_ativos = True
+
+            texto = result['tikers'][0]
             rel = Relatorio()
-            self.progressBar.setValue(self.progressBar.value() + 2)
-            self.lcdNumber.display(self.progressBar.value() + 2)
             acoes = rel.organizarTiker(texto)
-            self.progressBar.setValue(self.progressBar.value() + 2)
-            self.lcdNumber.display(self.progressBar.value() + 2)
+
             try:
                 rel.gerar_relatorio(flag_imprimir_tabela,flag_imprimir_grafico,flag_imprimir_grafico_normalizado,flag_imprimir_grafico_volatividade,flag_imprimir_retorno_volatividade,flag_imprimir_melhores_ativos, data_inicio, data_fim, acoes)
-                self.progressBar.setValue(self.progressBar.value() + 86)
-                self.lcdNumber.display(self.progressBar.value() + 86)
+                time.sleep(1)
+                return send_file(os.path.dirname(__file__)+'/dados.pdf', attachment_filename='dados.pdf')
             except:
-                self.progressBar.setValue(0)
-                self.lcdNumber.display(0)
+                pass
 
-            self.progressBar.setValue(0)
-            self.lcdNumber.display(0)
+        return render_template('index.html')
 
-        self.gerarRelatorio.clicked.connect(gerarRelatorio)
-        
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    ui = MainWindow()
-    ui.show()
-    sys.exit(app.exec_())
+if __name__ == '__main__':
+   app.run(debug=False)
