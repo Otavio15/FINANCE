@@ -40,12 +40,12 @@ def index():
 
             try:
                 rel.gerar_relatorio(flag_imprimir_tabela,flag_imprimir_grafico,flag_imprimir_grafico_normalizado,flag_imprimir_grafico_volatividade,flag_imprimir_retorno_volatividade,flag_imprimir_melhores_ativos, data_inicio, data_fim, acoes)
-                time.sleep(1)
-                return send_file(os.path.dirname(__file__)+'/dados.pdf', attachment_filename='dados.pdf')
+                time.sleep(2)
+                return send_file(os.path.dirname(__file__)+'dados.pdf', as_attachment=True, attachment_filename='dados.pdf')
             except:
                 pass
 
-        return render_template('index.html')
+        return send_file(os.path.dirname(__file__)+'dados.pdf', as_attachment=True, attachment_filename='dados.pdf')
 
 if __name__ == '__main__':
    app.run(debug=False)
