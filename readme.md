@@ -14,4 +14,3 @@ Link do Yahoo Finance: https://finance.yahoo.com/
     ;AAPL ; PETR4.SA ; ITSA4.SA; ... ;
 
 É importante separar o tiker dos ativos com o sinal de ponto e vírgula.
-
