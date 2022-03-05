@@ -19,7 +19,7 @@ Pillow==7.2.0
 pyparsing==2.4.7
 python-dateutil==2.8.1
 pytz==2020.1
-reportlab==3.5.44
+reportlab==3.5.55
 requests==2.24.0
 six==1.15.0
 svglib==1.0.0
