@@ -1,10 +1,12 @@
-from .assets import Relatorio;
-from flask import Flask, render_template, request, send_file;
-import os, time;
+from .assets import Relatorio
+from flask import Flask, render_template, request, send_file
+import os
+import time
 
 app = Flask(__name__, template_folder=os.path.dirname(__file__))
 
-@app.route('/',methods = ['POST', 'GET'])
+
+@app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'GET':
         return render_template('index.html')
@@ -39,13 +41,15 @@ def index():
             acoes = rel.organizarTiker(texto)
 
             try:
-                rel.gerar_relatorio(flag_imprimir_tabela,flag_imprimir_grafico,flag_imprimir_grafico_normalizado,flag_imprimir_grafico_volatividade,flag_imprimir_retorno_volatividade,flag_imprimir_melhores_ativos, data_inicio, data_fim, acoes)
+                rel.gerar_relatorio(flag_imprimir_tabela, flag_imprimir_grafico, flag_imprimir_grafico_normalizado, flag_imprimir_grafico_volatividade,
+                                    flag_imprimir_retorno_volatividade, flag_imprimir_melhores_ativos, data_inicio, data_fim, acoes)
                 time.sleep(2)
                 return send_file(os.path.dirname(__file__)+'/dados.pdf', as_attachment=True, attachment_filename='dados.pdf')
             except:
                 pass
 
         return render_template('index.html')
+
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
