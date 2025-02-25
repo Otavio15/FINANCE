@@ -44,8 +44,13 @@ def index():
                 rel.gerar_relatorio(flag_imprimir_tabela, flag_imprimir_grafico, flag_imprimir_grafico_normalizado, flag_imprimir_grafico_volatividade,
                                     flag_imprimir_retorno_volatividade, flag_imprimir_melhores_ativos, data_inicio, data_fim, acoes)
                 time.sleep(2)
-                return send_file(os.path.dirname(__file__)+'/dados.pdf', as_attachment=True, attachment_filename='dados.pdf')
+                # Corrigindo o caminho do arquivo
+                file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'dados.pdf'))
+
+                # Usando o argumento correto 'download_name'
+                return send_file(file_path, as_attachment=True, download_name='dados.pdf')
             except:
+                print("Erro ao gerar relatório")
                 pass
 
         return render_template('index.html')

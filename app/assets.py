@@ -1,11 +1,11 @@
 
 import numpy as np 
 import pandas as pd 
-import matplotlib.pyplot as plt 
+import matplotlib
+matplotlib.use('Agg')  # Desabilita a necessidade de interface gráfica
+import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
-from pandas_datareader import data as wb 
-from svglib.svglib import svg2rlg
-from io import BytesIO
+import yfinance as yf
 import six, os #,webbrowser
 
 class Relatorio:
@@ -34,8 +34,22 @@ class Relatorio:
 
     def get_dataframe(self, tikers, data_inicio, data_fim):
         data_frame = pd.DataFrame()
+
         for t in tikers:
-            data_frame[t] = wb.DataReader(t, data_source='yahoo', start=data_inicio, end=data_fim)['Adj Close']
+            try:
+                # Usando yfinance para obter os dados
+                df = yf.download(t, start=data_inicio, end=data_fim)
+
+                print("O df é ", df)
+
+                # Verifica se a coluna 'Adj Close' existe antes de adicionar
+                if 'Close' in df.columns:
+                    data_frame[t] = df['Close']
+                else:
+                    print(f"Coluna 'Adj Close' não encontrada para o ticker {t}")
+            except Exception as e:
+                print(f"Erro ao obter dados para o ticker {t}: {e}")
+        
         return data_frame
 
     def plot_graph(self, data_frame, size):
