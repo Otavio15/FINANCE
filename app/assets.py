@@ -40,8 +40,6 @@ class Relatorio:
                 # Usando yfinance para obter os dados
                 df = yf.download(t, start=data_inicio, end=data_fim)
 
-                print("O df é ", df)
-
                 # Verifica se a coluna 'Adj Close' existe antes de adicionar
                 if 'Close' in df.columns:
                     data_frame[t] = df['Close']
